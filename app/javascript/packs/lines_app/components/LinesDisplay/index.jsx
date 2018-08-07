@@ -52,14 +52,16 @@ class LinesDisplay extends React.Component {
     return (
       <div>
         {previousLineId &&
-        <Link to={`/?line=${previousLineId}`}>
+        <Button variant="contained" component={Link} to={`/?line=${previousLineId}`}
+                color="primary">
           Previous
-        </Link>
+        </Button>
         }
         {nextLineId &&
-        <Link to={`/?line=${nextLineId}`}>
+        <Button variant="contained" component={Link} to={`/?line=${nextLineId}`}
+                color="primary">
           Next
-        </Link>
+        </Button>
         }
         <p>{line.text}</p>
         <p>{line.author}</p>
