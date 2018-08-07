@@ -4,4 +4,4 @@ import App from './components/App'
 
 
 const lines = document.querySelector('#lines')
-ReactDOM.render(<App />, lines)
+ReactDOM.render(<App startingLineId={lines.dataset.startingLineId} />, lines )

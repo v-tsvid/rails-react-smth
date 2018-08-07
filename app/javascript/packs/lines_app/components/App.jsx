@@ -6,11 +6,12 @@ import {
 import LinesDisplay from './LinesDisplay/'
 
 const App = (props) => (
-  <Router>
+  <Router startingLineId={props.startingLineId}>
     <div>
       <Route
         path='/'
-        component={LinesDisplay}
+        startingLineId={props.startingLineId}
+        render={(routeProps) => <LinesDisplay {...props} {...routeProps} />}
       />
     </div>
   </Router>

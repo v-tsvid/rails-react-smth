@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import queryString from 'query-string';
 import axios from 'axios';
+import Button from '@material-ui/core/Button';
 
 class LinesDisplay extends React.Component {
   constructor () {
@@ -27,7 +28,7 @@ class LinesDisplay extends React.Component {
       // assign line ID from the URL's query string
       this.lineId = Number(this.qsParams.line);
     } else {
-      this.lineId = 80545;
+      this.lineId = this.props.startingLineId;
       // update URL in browser to reflect current line in query string
       this.props.history.push(`/?line=${this.lineId}`);
     }
