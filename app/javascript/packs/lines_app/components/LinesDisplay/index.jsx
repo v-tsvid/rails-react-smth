@@ -12,7 +12,6 @@ class LinesDisplay extends React.Component {
   }
 
   fetchLine (id) {
-    
     axios.get( `api/lines/${id}` )
       .then(response => {
         this.setState({ line: response.data });
@@ -28,7 +27,7 @@ class LinesDisplay extends React.Component {
       // assign line ID from the URL's query string
       this.lineId = Number(this.qsParams.line);
     } else {
-      this.lineId = 77545;
+      this.lineId = 80545;
       // update URL in browser to reflect current line in query string
       this.props.history.push(`/?line=${this.lineId}`);
     }
@@ -49,7 +48,7 @@ class LinesDisplay extends React.Component {
 
     return (
       <div>
-        <Link to={`/?line=${nextLineId}`} id={nextLineId}>Next</Link>
+        <Link to={`/?line=${nextLineId}`}>Next</Link>
         <p>{this.state.line.text}</p>
         <p>{this.state.line.author}</p>
       </div>

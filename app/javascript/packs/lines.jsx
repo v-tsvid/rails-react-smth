@@ -1,1 +1,1 @@
-import 'lines'
+import './lines_app'

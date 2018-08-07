@@ -3,7 +3,7 @@ import {
   BrowserRouter as Router,
   Route
 } from 'react-router-dom'
-import LinesDisplay from './LinesDisplay'
+import LinesDisplay from './LinesDisplay/'
 
 const App = (props) => (
   <Router>
