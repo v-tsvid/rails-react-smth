@@ -44,13 +44,24 @@ class LinesDisplay extends React.Component {
   }
 
   render () {
-    const nextLineId = Number(this.state.line.id) + 1;
+    const line = this.state.line;
+    const nextLineId = line.next_id;
+    const previousLineId = line.previous_id;
 
     return (
       <div>
-        <Link to={`/?line=${nextLineId}`}>Next</Link>
-        <p>{this.state.line.text}</p>
-        <p>{this.state.line.author}</p>
+        {previousLineId &&
+        <Link to={`/?line=${previousLineId}`}>
+          Previous
+        </Link>
+        }
+        {nextLineId &&
+        <Link to={`/?line=${nextLineId}`}>
+          Next
+        </Link>
+        }
+        <p>{line.text}</p>
+        <p>{line.author}</p>
       </div>
     );
   }
