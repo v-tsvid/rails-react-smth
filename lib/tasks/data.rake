@@ -20,12 +20,12 @@ namespace :data do
         csv_rows = CSV.parse(lines.join, headers: headers, liberal_parsing: true)
 
         csv_rows.each do |row|
-          s = Season.first_or_create(number: row[0])
-          e = Episode.first_or_create(number: row[1], season: s)
-          c = Character.first_or_create(name: row[2])
+          s = Season.where(number: row[0]).first_or_create
+          e = Episode.where(number: row[1], season: s).first_or_create
+          c = Character.where(name: row[2]).first_or_create
           Line.create(text: row[3], episode: e, character: c)
           i += 1
-
+    
           puts "Processed line #{i}: #{row[3]&.slice(0, 20)}"
         end
       end
