@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import queryString from 'query-string';
 import axios from 'axios';
 import Button from '@material-ui/core/Button';
+import Line from '../Line/'
 
 class LinesDisplay extends React.Component {
   constructor () {
@@ -50,21 +51,22 @@ class LinesDisplay extends React.Component {
     const previousLineId = line.previous_id;
 
     return (
-      <div>
-        {previousLineId &&
-        <Button variant="contained" component={Link} to={`/?line=${previousLineId}`}
-                color="primary">
-          Previous
-        </Button>
-        }
-        {nextLineId &&
-        <Button variant="contained" component={Link} to={`/?line=${nextLineId}`}
-                color="primary">
-          Next
-        </Button>
-        }
-        <p>{line.text}</p>
-        <p>{line.author}</p>
+      <div className="line-display-container">
+        <div className="inline-block">
+          {
+            previousLineId && <Button variant="contained" component={Link} to={`/?line=${previousLineId}`} color="primary">
+              Previous
+            </Button>
+          }
+        </div>
+        <div className="inline-block"><Line line={line}/></div>
+        <div className="inline-block">
+          {
+            nextLineId && <Button className="inline-button" variant="contained" component={Link} to={`/?line=${nextLineId}`} color="primary">
+                Next
+            </Button>
+          }
+        </div>
       </div>
     );
   }
