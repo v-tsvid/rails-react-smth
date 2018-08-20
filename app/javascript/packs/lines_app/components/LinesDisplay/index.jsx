@@ -4,6 +4,7 @@ import queryString from 'query-string';
 import axios from 'axios';
 import Button from '@material-ui/core/Button';
 import Line from '../Line/'
+import MenuAppBar from '../MenuAppBar'
 
 class LinesDisplay extends React.Component {
   constructor () {
@@ -51,21 +52,24 @@ class LinesDisplay extends React.Component {
     const previousLineId = line.previous_id;
 
     return (
-      <div className="line-display-container">
-        <div className="inline-block">
-          {
-            previousLineId && <Button variant="contained" component={Link} to={`/?line=${previousLineId}`} color="primary">
-              Previous
-            </Button>
-          }
-        </div>
-        <div className="inline-block"><Line line={line}/></div>
-        <div className="inline-block">
-          {
-            nextLineId && <Button className="inline-button" variant="contained" component={Link} to={`/?line=${nextLineId}`} color="primary">
-                Next
-            </Button>
-          }
+      <div>
+        <MenuAppBar />
+        <div className="line-display-container">
+          <div className="inline-block">
+            {
+              previousLineId && <Button variant="contained" component={Link} to={`/?line=${previousLineId}`} color="primary">
+                Previous
+              </Button>
+            }
+          </div>
+          <div className="inline-block"><Line line={line}/></div>
+          <div className="inline-block">
+            {
+              nextLineId && <Button className="inline-button" variant="contained" component={Link} to={`/?line=${nextLineId}`} color="primary">
+                  Next
+              </Button>
+            }
+          </div>
         </div>
       </div>
     );

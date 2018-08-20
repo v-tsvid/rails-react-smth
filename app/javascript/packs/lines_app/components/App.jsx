@@ -6,15 +6,18 @@ import {
 import LinesDisplay from './LinesDisplay/'
 
 const App = (props) => (
-  <Router startingLineId={props.startingLineId}>
-    <div>
-      <Route
-        path='/'
-        startingLineId={props.startingLineId}
-        render={(routeProps) => <LinesDisplay {...props} {...routeProps} />}
-      />
-    </div>
-  </Router>
+  <div>
+      <Router startingLineId={props.startingLineId}>
+        <div>
+          <Route
+            path='/'
+            startingLineId={props.startingLineId}
+            render={(routeProps) =>
+                <LinesDisplay {...props} {...routeProps} />}
+          />
+        </div>
+      </Router>
+  </div>
 )
 
 // You will need this on the bottom of each component file
