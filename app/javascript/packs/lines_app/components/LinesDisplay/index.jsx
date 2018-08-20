@@ -4,11 +4,11 @@ import queryString from 'query-string';
 import axios from 'axios';
 import Button from '@material-ui/core/Button';
 import Line from '../Line/'
-import MenuAppBar from '../MenuAppBar'
 
 class LinesDisplay extends React.Component {
-  constructor () {
-    super();
+  constructor (props) {
+    super(props);
+
     this.state = {
       line: {}
     };
@@ -53,7 +53,7 @@ class LinesDisplay extends React.Component {
 
     return (
       <div>
-        <MenuAppBar />
+        {/*<MenuAppBar />*/}
         <div className="line-display-container">
           <div className="inline-block">
             {

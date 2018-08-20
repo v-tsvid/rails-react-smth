@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
   def home
-    @first_line_id = Line.first.id
+    @starting_line_id = Line.order('RANDOM()').first.id
   end
 end
