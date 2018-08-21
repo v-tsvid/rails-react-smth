@@ -33,7 +33,7 @@ class LeftDrawerList extends React.Component {
     this.state = {
       seasons: {},
       episodes: {},
-      open: true,
+      open: '1',
     };
   }
 
@@ -58,8 +58,8 @@ class LeftDrawerList extends React.Component {
   }
 
   componentDidMount () {
-    this.fetchSeasons()
-    this.fetchEpisodes()
+    this.fetchSeasons();
+    this.fetchEpisodes();
   }
 
   // componentWillReceiveProps (nextProps) {
@@ -67,16 +67,56 @@ class LeftDrawerList extends React.Component {
   //   this.fetchEpisodes();
   // }
 
-  handleClick = () => {
-    this.setState(state => ({ open: !state.open }));
+  handleClick = (num) => {
+    this.setState({ open: (this.state.open == num ? '0' : num) });
   };
+
+  seasonListItems() {
+    const { seasons } = this.state
+    let listItems = []
+
+    {Object.keys(seasons).map((key) =>
+      listItems.push(
+        <div key={'s' + seasons[key]}>
+          <ListItem key={'s' + seasons[key]} button onClick={() => this.handleClick(seasons[key])} >
+            <ListItemIcon>
+              <SendIcon/>
+            </ListItemIcon>
+            <ListItemText inset primary={'Season ' + seasons[key]}/>
+          </ListItem>
+          {this.episodeListItems(key)}
+        </div>
+      )
+    )}
+
+    return (listItems)
+  }
+
+  episodeListItems(key) {
+    const { seasons, episodes } = this.state
+    const { classes } = this.props;
+    let listItems = []
+
+    {episodes[key] && episodes[key].map((episode) =>
+      listItems.push(
+        <Collapse key={'s' + seasons[key] + 'e' + episode[1]} in={this.state.open == seasons[key]} timeout="auto" unmountOnExit>
+          <List component="div" disablePadding>
+            <ListItem button className={classes.nested} >
+              <ListItemIcon>
+                <StarBorder />
+              </ListItemIcon>
+              <ListItemText inset primary={'Episode ' + episode[1]} />
+            </ListItem>
+          </List>
+        </Collapse>
+      )
+    )}
+
+    return (listItems)
+  }
 
   render() {
     const { classes } = this.props;
-    const { seasons, episodes } = this.state;
-
-    console.log(seasons)
-    console.log(episodes)
 
     return (
       <div className={classes.root}>
@@ -84,30 +124,7 @@ class LeftDrawerList extends React.Component {
           component="nav"
           subheader={<ListSubheader component="div">Nested List Items</ListSubheader>}
         >
-          {Object.keys(seasons).map((key) =>
-            <div>
-              <ListItem button key={seasons[key]}>
-                <ListItemIcon>
-                  <SendIcon/>
-                </ListItemIcon>
-                <ListItemText inset primary={seasons[key]}/>
-              </ListItem>
-              {
-                episodes[key] && episodes[key].map((item) =>
-                  <Collapse in={this.state.open} timeout="auto" unmountOnExit>
-                    <List component="div" disablePadding>
-                      <ListItem button className={classes.nested} key={item[0]}>
-                        <ListItemIcon>
-                          <StarBorder />
-                        </ListItemIcon>
-                        <ListItemText inset primary={item[1]} />
-                      </ListItem>
-                    </List>
-                  </Collapse>
-                )
-              }
-            </div>
-          )}
+          {this.seasonListItems()}
         </List>
       </div>
     );
