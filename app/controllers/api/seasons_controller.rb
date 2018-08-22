@@ -1,5 +1,5 @@
 class Api::SeasonsController < ApplicationController
   def index
-    @seasons = Season.order(number: :asc).pluck(:id, :number)
+    @seasons = Season.pluck(:id, :number)
   end
 end

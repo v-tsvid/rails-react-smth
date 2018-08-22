@@ -1,6 +1,6 @@
 class Api::EpisodesController < ApplicationController
   def index
-    episodes_array = Episode.includes(:season).all.pluck('seasons.id', 'episodes.id', 'episodes.number')
+    episodes_array = Episode.includes(:season).pluck('seasons.id', 'episodes.id', 'episodes.number')
     @episodes = {}
     episodes_array.each do |e|
       if @episodes[e[0]].blank?

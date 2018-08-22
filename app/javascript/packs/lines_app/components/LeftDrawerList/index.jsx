@@ -57,15 +57,18 @@ class LeftDrawerList extends React.Component {
       });
   }
 
+  sortSeasonKeys(seasons) {
+    let {result} = Object.keys(seasons)
+    result.sort(function(a,b) {
+      return seasons[a] - seasons[b]
+    })
+    return result
+  }
+
   componentDidMount () {
     this.fetchSeasons();
     this.fetchEpisodes();
   }
-
-  // componentWillReceiveProps (nextProps) {
-  //   this.fetchSeasons();
-  //   this.fetchEpisodes();
-  // }
 
   handleClick = (num) => {
     this.setState({ open: (this.state.open == num ? '0' : num) });
@@ -75,7 +78,9 @@ class LeftDrawerList extends React.Component {
     const { seasons } = this.state
     let listItems = []
 
-    {Object.keys(seasons).map((key) =>
+    {Object.keys(seasons).sort(function(a,b) {
+      return seasons[a] - seasons[b]
+    }).map((key) =>
       listItems.push(
         <div key={'s' + seasons[key]}>
           <ListItem key={'s' + seasons[key]} button onClick={() => this.handleClick(seasons[key])} >
@@ -122,7 +127,7 @@ class LeftDrawerList extends React.Component {
       <div className={classes.root}>
         <List
           component="nav"
-          subheader={<ListSubheader component="div">Nested List Items</ListSubheader>}
+          subheader={<ListSubheader component="div">Select season or episode</ListSubheader>}
         >
           {this.seasonListItems()}
         </List>
